@@ -1,19 +1,110 @@
-<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>.render() | Echo - にほんご。</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta property="og:title" content=".render() | Echo - にほんご。"><meta property="og:url"><meta property="og:type" content="article"><link rel="icon" href="https://tr.you84815.space/echo/favicon.ico"><link rel="stylesheet" href="../css/main.css"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-106478577-1', 'auto');</script></head><body><div id="container"><header><div class="icon"><a class="no-barba" href="https://tr.you84815.space/"><svg width="16" height="16"><rect width="16" height="16" fill="#e0e0e0"></rect></svg></a></div><div class="navi_toggle" onclick="toggleMenu()"><svg id="menu_close" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg><svg id="menu_open" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></div><div class="title">Echo - <a class="no-barba" href="https://tr.you84815.space/">にほんご。</a></div></header><div class="navi" id="navi"><ul class="menu"><li><a class="index" href="../index.html">Home</a></li><li><a class="introduction" href="../introduction.html">Introduction</a></li><li><span onclick="toggleMethods()">Methods</span><ul id="navi_methods"><li><a href="../methods/init.html">.init()</a><ul><li><a class="no-barba" href="../methods/init.html#offset">offset</a></li><li><a class="no-barba" href="../methods/init.html#offsetVertical">offsetVertical</a></li><li><a class="no-barba" href="../methods/init.html#offsetHorizontal">offsetHorizontal</a></li><li><a class="no-barba" href="../methods/init.html#offsetTop">offsetTop</a></li><li><a class="no-barba" href="../methods/init.html#offsetBottom">offsetBottom</a></li><li><a class="no-barba" href="../methods/init.html#offsetLeft">offsetLeft</a></li><li><a class="no-barba" href="../methods/init.html#offsetRight">offsetRight</a></li><li><a class="no-barba" href="../methods/init.html#throttle">throttle</a></li><li><a class="no-barba" href="../methods/init.html#debounce">debounce</a></li><li><a class="no-barba" href="../methods/init.html#unload">unload</a></li><li><a class="no-barba" href="../methods/init.html#callback">callback</a></li></ul></li><li><a class="active" href="../methods/render.html">.render()</a></li></ul></li><li><a class="contributing" href="../contributing.html">Contributing</a></li></ul></div><div id="content"><div id="main"><div id="barba-wrapper"><div class="barba-container"><h1>.render()</h1><div id="update_date"><span>更新日: 2018.09.04
-</span></div><p><code>render()</code>は、スクロールしていない場合にも
-画像のロードを待機(ポーリング)させることができます。
-例えば、画像を差し替える必要があるにもかかわらず、スクロール中でない場合、
-スクロールせずに、内部関数を呼び出す必要があります。
-このような時に<code>render()</code>を使います。</p><pre><code>echo.render();</code></pre><p><code>render()</code>も<code>throttle</code>で管理されます。
-これは<code>onresize</code>イベントにバインド出来ることを意味し、
-<code>onscroll</code>イベントと同様に最適化されます。</p><br><h3>デモ</h3><p>1番上の画像だけが表示されている状態で、「1つ目の画像を削除」をクリックします。<br><code>render()</code>を"有効"にしている場合、1つ目の画像が削除され、2つ目の画像が表示されます。
-3つめ以降の画像も同様です。<br><code>render()</code>を"無効"にしている場合、1つ目の画像が削除され、2つ目の画像がローディング中のまま表示されません。
-スクロールすると表示されます。
-3つめ以降の画像も同様です。</p><p><b>render() :</b><input id="render" type="radio" name="render" value="1" checked><label for="render">有効</label><input id="no-render" type="radio" name="render" value="0"><label for="no-render">無効</label><button id="del">1つ目の画像を削除</button></p><div class="demo"><img src="../img/blank.gif" data-echo="../img/1.jpg"><img src="../img/blank.gif" data-echo="../img/2.jpg"><img src="../img/blank.gif" data-echo="../img/3.jpg"><img src="../img/blank.gif" data-echo="../img/4.jpg"></div><h5>JavaScript</h5><pre><code>echo.init();
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>.render() | Echo - にほんご。</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="og:title" content=".render() | Echo - にほんご。">
+    <meta property="og:url">
+    <meta property="og:type" content="article">
+    <link rel="icon" href="https://tr.you84815.space/echo/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link id="theme_style" rel="stylesheet" type="text/css" href="">
+    <script id="srcTheme" src="../js/toggleTheme.js" data-dir="echo"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-106478577-1', 'auto');
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <div class="icon"><a class="no-barba" href="https://tr.you84815.space/">
+            <svg width="16" height="16">
+              <rect width="16" height="16" fill="#e0e0e0"></rect>
+            </svg></a></div>
+        <div class="navi_toggle" onclick="toggleMenu()">
+          <svg id="menu_close" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+          <svg id="menu_open" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+          </svg>
+        </div>
+        <div class="title">Echo - <a class="no-barba" href="https://tr.you84815.space/">にほんご。</a></div><span id="toggleTheme">
+          <svg role="img" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705 0 184 82.311 184 184 0 101.705-82.311 184-184 184z"></path>
+          </svg></span>
+      </header>
+      <div class="navi" id="navi">
+        <ul class="menu">
+          <li><a class="index" href="../index.html">Home</a></li>
+          <li><a class="introduction" href="../introduction.html">Introduction</a></li>
+          <li><span onclick="toggleMethods()">Methods</span>
+            <ul id="navi_methods">
+              <li><a href="../methods/init.html">.init()</a>
+                <ul>
+                  <li><a class="no-barba" href="../methods/init.html#offset">offset</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#offsetVertical">offsetVertical</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#offsetHorizontal">offsetHorizontal</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#offsetTop">offsetTop</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#offsetBottom">offsetBottom</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#offsetLeft">offsetLeft</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#offsetRight">offsetRight</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#throttle">throttle</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#debounce">debounce</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#unload">unload</a></li>
+                  <li><a class="no-barba" href="../methods/init.html#callback">callback</a></li>
+                </ul>
+              </li>
+              <li><a class="active" href="../methods/render.html">.render()</a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="contributing" href="../contributing.html">Contributing</a></li>
+        </ul>
+      </div>
+      <div id="content">
+        <div id="main">
+          <div id="barba-wrapper">
+            <div class="barba-container">
+              <h1>.render()</h1>
+              <div id="update_date"><span>更新日: 2018.09.04
+</span>
+              </div>
+              <p><code>render()</code>は、スクロールしていない場合にも
+                画像のロードを待機(ポーリング)させることができます。
+                例えば、画像を差し替える必要があるにもかかわらず、スクロール中でない場合、
+                スクロールせずに、内部関数を呼び出す必要があります。
+                このような時に<code>render()</code>を使います。
+              </p>
+              <pre><code>echo.render();</code></pre>
+              <p><code>render()</code>も<code>throttle</code>で管理されます。
+                これは<code>onresize</code>イベントにバインド出来ることを意味し、
+                <code>onscroll</code>イベントと同様に最適化されます。
+              </p><br>
+              <h3>デモ</h3>
+              <p>1番上の画像だけが表示されている状態で、「1つ目の画像を削除」をクリックします。<br><code>render()</code>を"有効"にしている場合、1つ目の画像が削除され、2つ目の画像が表示されます。
+                3つめ以降の画像も同様です。<br><code>render()</code>を"無効"にしている場合、1つ目の画像が削除され、2つ目の画像がローディング中のまま表示されません。
+                スクロールすると表示されます。
+                3つめ以降の画像も同様です。
+              </p>
+              <p><b>render() :</b>
+                <input id="render" type="radio" name="render" value="1" checked>
+                <label for="render">有効</label>
+                <input id="no-render" type="radio" name="render" value="0">
+                <label for="no-render">無効</label>
+                <button id="del">1つ目の画像を削除</button>
+              </p>
+              <div class="demo"><img src="../img/blank.gif" data-echo="../img/1.jpg"><img src="../img/blank.gif" data-echo="../img/2.jpg"><img src="../img/blank.gif" data-echo="../img/3.jpg"><img src="../img/blank.gif" data-echo="../img/4.jpg"></div>
+              <h5>JavaScript</h5>
+              <pre><code>echo.init();
 <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'del'</span>).addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">var</span> img = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'.demo &gt; img'</span>);
   <span class="hljs-keyword">if</span> (img.length &lt; <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span>;
@@ -21,7 +112,9 @@ ga('create', 'UA-106478577-1', 'auto');</script></head><body><div id="container"
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'render'</span>).checked) {
     echo.render();
   }
-});</code></pre><h5>HTML</h5><pre><code><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+});</code></pre>
+              <h5>HTML</h5>
+              <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>render() :<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"render"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"radio"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"render"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">checked</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"render"</span>&gt;</span>有効<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
@@ -34,17 +127,40 @@ ga('create', 'UA-106478577-1', 'auto');</script></head><body><div id="container"
   <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./img/blank.gif"</span> <span class="hljs-attr">data-echo</span>=<span class="hljs-string">"./img/2.jpg"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./img/blank.gif"</span> <span class="hljs-attr">data-echo</span>=<span class="hljs-string">"./img/3.jpg"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./img/blank.gif"</span> <span class="hljs-attr">data-echo</span>=<span class="hljs-string">"./img/4.jpg"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre><script class="load">createObj = function() {
-  if (document.getElementById('del')) {
-    echo.init();
-    document.getElementById('del').addEventListener('click', function(){
-      var img = document.querySelectorAll('.demo > img');
-      if (img.length < 2) return;
-      document.querySelector('.demo').removeChild(img[0]);
-      if (document.getElementById('render').checked) {
-        echo.render();
-      }
-    });
-  }
-};</script><br><div class="license"><p>&copy; 2016
- Todd Motto Released under the <a href="https://github.com/toddmotto/echo/blob/master/license.">MIT license</a></p><p>このコンテンツはTodd Motto(toddmotto)による<a href="https://github.com/toddmotto/echo">Echo.jsドキュメント</a>を翻訳/改変したものです。</p></div></div></div></div></div><footer><span> &copy; <span id="copy_year">2017</span> tobijibu</span></footer></div><noscript id="deferred-styles"><link href="../css/lazy.css" rel="stylesheet"></noscript><script src="../js/main.js" defer></script><script src="../js/echo.min.js"></script><div id="src" hidden></div></body></html>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+              <script class="load">
+                createObj = function() {
+                  if (document.getElementById('del')) {
+                    echo.init();
+                    document.getElementById('del').addEventListener('click', function(){
+                      var img = document.querySelectorAll('.demo > img');
+                      if (img.length < 2) return;
+                      document.querySelector('.demo').removeChild(img[0]);
+                      if (document.getElementById('render').checked) {
+                        echo.render();
+                      }
+                    });
+                  }
+                };
+              </script><br>
+              <div class="license">
+                <p>
+                  &copy; 2016
+                   Todd Motto Released under the <a href="https://github.com/toddmotto/echo/blob/master/license.">MIT license</a>
+                </p>
+                <p>このコンテンツはTodd Motto(toddmotto)による<a href="https://github.com/toddmotto/echo">Echo.jsドキュメント</a>を翻訳/改変したものです。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer><span>&copy; <span id="copy_year">2017</span> tobijibu</span></footer>
+    </div>
+    <noscript id="deferred-styles">
+      <link href="../css/lazy.css" rel="stylesheet">
+    </noscript>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/echo.min.js"></script>
+    <div id="src" hidden></div>
+  </body>
+</html>

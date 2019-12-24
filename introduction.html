@@ -1,22 +1,113 @@
-<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>Introduction | Echo - にほんご。</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta property="og:title" content="Introduction | Echo - にほんご。"><meta property="og:url"><meta property="og:type" content="article"><link rel="icon" href="https://tr.you84815.space/echo/favicon.ico"><link rel="stylesheet" href="./css/main.css"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-106478577-1', 'auto');</script></head><body><div id="container"><header><div class="icon"><a class="no-barba" href="https://tr.you84815.space/"><svg width="16" height="16"><rect width="16" height="16" fill="#e0e0e0"></rect></svg></a></div><div class="navi_toggle" onclick="toggleMenu()"><svg id="menu_close" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg><svg id="menu_open" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></div><div class="title">Echo - <a class="no-barba" href="https://tr.you84815.space/">にほんご。</a></div></header><div class="navi" id="navi"><ul class="menu"><li><a class="index" href="./index.html">Home</a></li><li><a class="introduction active" href="./introduction.html">Introduction</a></li><li><span onclick="toggleMethods()">Methods</span><ul class="hidden" id="navi_methods"><li><a href="./methods/init.html">.init()</a><ul><li><a class="no-barba" href="./methods/init.html#offset">offset</a></li><li><a class="no-barba" href="./methods/init.html#offsetVertical">offsetVertical</a></li><li><a class="no-barba" href="./methods/init.html#offsetHorizontal">offsetHorizontal</a></li><li><a class="no-barba" href="./methods/init.html#offsetTop">offsetTop</a></li><li><a class="no-barba" href="./methods/init.html#offsetBottom">offsetBottom</a></li><li><a class="no-barba" href="./methods/init.html#offsetLeft">offsetLeft</a></li><li><a class="no-barba" href="./methods/init.html#offsetRight">offsetRight</a></li><li><a class="no-barba" href="./methods/init.html#throttle">throttle</a></li><li><a class="no-barba" href="./methods/init.html#debounce">debounce</a></li><li><a class="no-barba" href="./methods/init.html#unload">unload</a></li><li><a class="no-barba" href="./methods/init.html#callback">callback</a></li></ul></li><li><a href="./methods/render.html">.render()</a></li></ul></li><li><a class="contributing" href="./contributing.html">Contributing</a></li></ul></div><div id="content"><div id="main"><div id="barba-wrapper"><div class="barba-container"><h1>Introduction</h1><div id="update_date"><span>更新日: 2018.09.04
-</span></div><p>Echo.jsは、他のライブラリに依存していない、画像のlazy-loading(遅延ロード)ライブラリです。
-Echo.jsは高速で、たった2kBしか無く、HTML5の<code>data-*</code>属性を使います。<br>Echo.jsはIE8以上で動作します。<br>試しに、<a href="https://toddmotto.com/labs/echo/" target="_blank" rel="noopener noreferrer">デモ</a>を確認してみてください。</p><h2>インストール</h2><p> </p><h3>bower</h3><pre><code><span class="hljs-meta">$</span><span class="bash"> bower install echojs</span></code></pre><h3>npm</h3><pre><code><span class="hljs-meta">$</span><span class="bash"> npm install <span class="hljs-built_in">echo</span>-js</span></code></pre><br><h2>手動インストール</h2><p>ソースを<a href="https://github.com/toddmotto/echo/archive/master.zip">ダウンロード</a>して、HTMLで<code>echo.min.js</code>を読み込むことも出来ます。<br><code>dist</code>フォルダのコンパイル済みのファイルであることを確認して、フォルダに設置します。
-<code>body</code>タグの閉じタグの前にスクリプトを設置して、
-スクリプトの実行時点でDOMツリーが生成済みになるようにしてください。</p><pre><code>...
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"echo.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre><h2>使い方</h2><p>Echo.js(以下Echo)はとても簡単です。
-画像をページに追加する際に、<code>img</code>タグに<code>data-echo</code>を追加するだけです。
-また、背景画像を遅延ロードしたい場合は、
-画像のURLを持つ要素に<code>data-echo-background</code>を追加するだけです。</p><pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introduction | Echo - にほんご。</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="og:title" content="Introduction | Echo - にほんご。">
+    <meta property="og:url">
+    <meta property="og:type" content="article">
+    <link rel="icon" href="https://tr.you84815.space/echo/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link id="theme_style" rel="stylesheet" type="text/css" href="">
+    <script id="srcTheme" src="./js/toggleTheme.js" data-dir="echo"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-106478577-1', 'auto');
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <div class="icon"><a class="no-barba" href="https://tr.you84815.space/">
+            <svg width="16" height="16">
+              <rect width="16" height="16" fill="#e0e0e0"></rect>
+            </svg></a></div>
+        <div class="navi_toggle" onclick="toggleMenu()">
+          <svg id="menu_close" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+          <svg id="menu_open" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+          </svg>
+        </div>
+        <div class="title">Echo - <a class="no-barba" href="https://tr.you84815.space/">にほんご。</a></div><span id="toggleTheme">
+          <svg role="img" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M8 256c0 136.966 111.033 248 248 248s248-111.034 248-248S392.966 8 256 8 8 119.033 8 256zm248 184V72c101.705 0 184 82.311 184 184 0 101.705-82.311 184-184 184z"></path>
+          </svg></span>
+      </header>
+      <div class="navi" id="navi">
+        <ul class="menu">
+          <li><a class="index" href="./index.html">Home</a></li>
+          <li><a class="introduction active" href="./introduction.html">Introduction</a></li>
+          <li><span onclick="toggleMethods()">Methods</span>
+            <ul class="hidden" id="navi_methods">
+              <li><a href="./methods/init.html">.init()</a>
+                <ul>
+                  <li><a class="no-barba" href="./methods/init.html#offset">offset</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#offsetVertical">offsetVertical</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#offsetHorizontal">offsetHorizontal</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#offsetTop">offsetTop</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#offsetBottom">offsetBottom</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#offsetLeft">offsetLeft</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#offsetRight">offsetRight</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#throttle">throttle</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#debounce">debounce</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#unload">unload</a></li>
+                  <li><a class="no-barba" href="./methods/init.html#callback">callback</a></li>
+                </ul>
+              </li>
+              <li><a href="./methods/render.html">.render()</a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="contributing" href="./contributing.html">Contributing</a></li>
+        </ul>
+      </div>
+      <div id="content">
+        <div id="main">
+          <div id="barba-wrapper">
+            <div class="barba-container">
+              <h1>Introduction</h1>
+              <div id="update_date"><span>更新日: 2018.09.04
+</span>
+              </div>
+              <p>
+                Echo.jsは、他のライブラリに依存していない、画像のlazy-loading(遅延ロード)ライブラリです。
+                Echo.jsは高速で、たった2kBしか無く、HTML5の<code>data-*</code>属性を使います。<br>Echo.jsはIE8以上で動作します。<br>試しに、<a href="https://toddmotto.com/labs/echo/" target="_blank" rel="noopener noreferrer">デモ</a>を確認してみてください。
+              </p>
+              <h2>インストール</h2>
+              <p> </p>
+              <h3>bower</h3>
+              <pre><code><span class="hljs-meta">$</span><span class="bash"> bower install echojs</span></code></pre>
+              <h3>npm</h3>
+              <pre><code><span class="hljs-meta">$</span><span class="bash"> npm install <span class="hljs-built_in">echo</span>-js</span></code></pre><br>
+              <h2>手動インストール</h2>
+              <p>ソースを<a href="https://github.com/toddmotto/echo/archive/master.zip">ダウンロード</a>して、HTMLで<code>echo.min.js</code>を読み込むことも出来ます。<br><code>dist</code>フォルダのコンパイル済みのファイルであることを確認して、フォルダに設置します。
+                <code>body</code>タグの閉じタグの前にスクリプトを設置して、
+                スクリプトの実行時点でDOMツリーが生成済みになるようにしてください。
+              </p>
+              <pre><code>...
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"echo.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre>
+              <h2>使い方</h2>
+              <p>
+                Echo.js(以下Echo)はとても簡単です。
+                画像をページに追加する際に、<code>img</code>タグに<code>data-echo</code>を追加するだけです。
+                また、背景画像を遅延ロードしたい場合は、
+                画像のURLを持つ要素に<code>data-echo-background</code>を追加するだけです。
+              </p>
+              <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
  
   <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"img/blank.gif"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Photo"</span> <span class="hljs-attr">data-echo</span>=<span class="hljs-string">"img/photo.jpg"</span>&gt;</span>
  
-  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"dist/echo.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"dist/echo.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
   echo.init({
     <span class="hljs-attr">offset</span>: <span class="hljs-number">100</span>,
@@ -29,27 +120,59 @@ Echo.jsは高速で、たった2kBしか無く、HTML5の<code>data-*</code>属�
  
   <span class="hljs-comment">// echo.render();は非スクロールのコールバックでも使うことができます。</span>
   </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre><br><h3>デモ</h3><p>ページを更新した際に、スクロール等で画像の一部が画面内に入るとローディングを開始し、画像を表示します。</p><div class="demo"><img src="./img/blank.gif" data-echo="./img/1.jpg"><img src="./img/blank.gif" data-echo="./img/2.jpg"><img src="./img/blank.gif" data-echo="./img/3.jpg"></div><h5>JavaScript</h5><pre><code>echo.init({
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre><br>
+              <h3>デモ</h3>
+              <p>ページを更新した際に、スクロール等で画像の一部が画面内に入るとローディングを開始し、画像を表示します。</p>
+              <div class="demo"><img src="./img/blank.gif" data-echo="./img/1.jpg"><img src="./img/blank.gif" data-echo="./img/2.jpg"><img src="./img/blank.gif" data-echo="./img/3.jpg"></div>
+              <h5>JavaScript</h5>
+              <pre><code>echo.init({
   <span class="hljs-attr">offset</span>: <span class="hljs-number">100</span>,
   <span class="hljs-attr">throttle</span>: <span class="hljs-number">250</span>,
   <span class="hljs-attr">unload</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">callback</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">element, op</span>) </span>{
     <span class="hljs-built_in">console</span>.log(element, <span class="hljs-string">'has been'</span>, op + <span class="hljs-string">'ed'</span>)
   }
-});</code></pre><h5>HTML</h5><pre><code><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./img/blank.gif"</span> <span class="hljs-attr">data-echo</span>=<span class="hljs-string">"./img/1.jpg"</span>&gt;</span>
+});</code></pre>
+              <h5>HTML</h5>
+              <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./img/blank.gif"</span> <span class="hljs-attr">data-echo</span>=<span class="hljs-string">"./img/1.jpg"</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./img/blank.gif"</span> <span class="hljs-attr">data-echo</span>=<span class="hljs-string">"./img/2.jpg"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./img/blank.gif"</span> <span class="hljs-attr">data-echo</span>=<span class="hljs-string">"./img/3.jpg"</span>&gt;</span></code></pre><h5>CSS</h5><pre><code><span class="hljs-selector-tag">img</span> {
+<span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./img/blank.gif"</span> <span class="hljs-attr">data-echo</span>=<span class="hljs-string">"./img/3.jpg"</span>&gt;</span></code></pre>
+              <h5>CSS</h5>
+              <pre><code><span class="hljs-selector-tag">img</span> {
   <span class="hljs-attribute">background</span>: <span class="hljs-number">#FFF</span> <span class="hljs-built_in">url</span>(<span class="hljs-string">"../img/ajax.gif"</span>) no-repeat center center;
   <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#ededed</span>;
 }
-</code></pre><script class="load">createObj = function() {
-  echo.init({
-    offset: 100,
-    throttle: 250,
-    unload: false,
-    callback: function (element, op) {
-      console.log(element, 'has been', op + 'ed')
-    }
-  });
-};</script><br><div class="license"><p>&copy; 2016
- Todd Motto Released under the <a href="https://github.com/toddmotto/echo/blob/master/license.">MIT license</a></p><p>このコンテンツはTodd Motto(toddmotto)による<a href="https://github.com/toddmotto/echo">Echo.jsドキュメント</a>を翻訳/改変したものです。</p></div></div></div></div></div><footer><span> &copy; <span id="copy_year">2017</span> tobijibu</span></footer></div><noscript id="deferred-styles"><link href="./css/lazy.css" rel="stylesheet"></noscript><script src="./js/main.js" defer></script><script src="./js/echo.min.js"></script><div id="src" hidden></div></body></html>
+</code></pre>
+              <script class="load">
+                createObj = function() {
+                  echo.init({
+                    offset: 100,
+                    throttle: 250,
+                    unload: false,
+                    callback: function (element, op) {
+                      console.log(element, 'has been', op + 'ed')
+                    }
+                  });
+                };
+              </script><br>
+              <div class="license">
+                <p>
+                  &copy; 2016
+                   Todd Motto Released under the <a href="https://github.com/toddmotto/echo/blob/master/license.">MIT license</a>
+                </p>
+                <p>このコンテンツはTodd Motto(toddmotto)による<a href="https://github.com/toddmotto/echo">Echo.jsドキュメント</a>を翻訳/改変したものです。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer><span>&copy; <span id="copy_year">2017</span> tobijibu</span></footer>
+    </div>
+    <noscript id="deferred-styles">
+      <link href="./css/lazy.css" rel="stylesheet">
+    </noscript>
+    <script src="./js/main.js" defer></script>
+    <script src="./js/echo.min.js"></script>
+    <div id="src" hidden></div>
+  </body>
+</html>
